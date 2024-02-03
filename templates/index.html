@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title></title>
+  <link rel="stylesheet" href="/static/css/bootstrap.min.css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+</head>
+{% include 'navbar.html' %}
+<body>
+  <div class="container-fluid">
+    <div class="row mt-3">
+      <div class="col-md-3 p-3 mb-2 bg-secondary-subtle text-emphasis-secondary">
+        <p class="fs-5 text-dark">Filter By Category</p>
+        <hr>
+        <a href="/home" >All</a><br/>
+        <a href="/catfilter/1" >Cats</a><br/>
+        <a href="/catfilter/2" >Dogs</a><br/>
+        <a href="/catfilter/3" >Birds</a><br/>
+        <br/>
+        <p class="fs-5 text-dark">Filter By Price</p>
+        <form action="/range">
+        <hr>
+        <p>min</p>
+        <input type="number" class="lh-lg form-control" name="min" id="input1">
+        <p>max</p>
+        <input type="number" class="lh-lg form-control" name="max" id="input2">
+        <br/>
+        <br/>
+        <input type="submit" class="btn btn-info" value="Search">
+      </form>
+        <br/>
+        <br/>
+        <p class="fs-5 text-dark">Sort By Price</p>
+        <hr>
+        <a href="/sort/0" >High to Low</a><br/>
+        <a href="/sort/1" >Low to High</a><br/>
+      </div>
+      <div class="col-md-9">
+        <div class="row ">
+           {% for x in Products %}
+           <div class="col-md-4 mt-2">
+             <div class="card" style="width: 10 rem;">
+               <img src="{{x.pimage.url}}" class="card-img-top" width="100%" height="200px" alt="...">
+                 <div class="card-body"><center>
+                   <h5 class="card-title">{{x.pname}}</h5>
+                   <h5 class="card-text">{{x.pcost}}</h5>
+
+                     {% if  x.cat == 1 %}
+                        <p class="card-text">Cats</p>
+                      {% elif  x.cat == 2 %}
+                          <p class="card-text">Dogs</p>
+                      {% else %}
+                          <p class="card-text">Birds</p>
+                      {% endif %}
+                        <a href="/pdetails/{{x.id}}" class="btn btn-info"> See Details</a>
+                        </center>
+                   </div>
+                </div>
+             </div>
+        {% endfor %}
+      </div>
+
+
+    </div>
+  </div>
+  <script src="/static/js/bootstrap.min.js"></script>
+  <script src="/static/js/popper.min.js"></script>
+</body>
+<br>
+<br>
+{% include 'footer.html' %}
+</html>
